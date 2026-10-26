@@ -1,0 +1,39 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run logic tests
+        run: npm test
+
+      - name: Check static assets and module paths
+        run: npm run check
+
+      - name: Build and verify the SEO output
+        run: |
+          mkdir -p _site
+          cp -R index.html guide.html 404.html .nojekyll assets css js _site/
+          node scripts/seo.mjs --dir _site --base https://example.github.io/both-homes
+          test -s _site/sitemap.xml
+          test -s _site/robots.txt
+          grep -q '<loc>https://example.github.io/both-homes/</loc>' _site/sitemap.xml
+          grep -q 'rel="canonical" href="https://example.github.io/both-homes/"' _site/index.html
+          grep -q 'property="og:image" content="https://example.github.io/both-homes/assets/og-card.png"' _site/index.html

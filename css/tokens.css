@@ -1,0 +1,179 @@
+:root {
+  color-scheme: light;
+
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --paper: #faf6ef;
+  --paper-deep: #f3ecdf;
+  --surface: #fffdf8;
+  --surface-2: #f4eee3;
+  --ink: #211c16;
+  --ink-2: #5d5347;
+  --ink-3: #6f6557;
+  --line: #e4dacb;
+  --line-strong: #cbbda8;
+
+  --brand: #1c6b58;
+  --brand-dark: #13503f;
+  --brand-ink: #ffffff;
+  --brand-soft: #e0efe8;
+
+  --a: #166b58;
+  --a-strong: #0f4d3e;
+  --a-soft: #dcece6;
+  --a-chip-text: #ffffff;
+
+  --b: #b3563b;
+  --b-strong: #853c25;
+  --b-soft: #f8e3d9;
+  --b-chip-text: #ffffff;
+
+  --gold: #8f6214;
+  --gold-soft: #f6e8c9;
+
+  --danger: #9d3227;
+  --danger-soft: #f8e2dd;
+  --focus: #1f5fa8;
+
+  --band-bg: #173f35;
+  --band-ink: #fbf7ee;
+  --band-muted: #c4ded4;
+  --band-line: rgba(255, 255, 255, 0.16);
+  --band-fill: rgba(255, 255, 255, 0.06);
+
+  --footer-bg: #1b221d;
+  --footer-ink: #f3ede2;
+  --footer-muted: #b7c1b8;
+  --footer-line: rgba(255, 255, 255, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(52, 40, 23, 0.06), 0 2px 8px rgba(52, 40, 23, 0.03);
+  --shadow-md: 0 18px 40px -22px rgba(42, 32, 18, 0.4), 0 2px 8px rgba(42, 32, 18, 0.05);
+  --shadow-dialog: 0 32px 80px -24px rgba(24, 20, 14, 0.5);
+
+  --radius-xs: 7px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 44px;
+  --space-9: 64px;
+
+  --shell: 1240px;
+  --header-h: 68px;
+
+  --ease: cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #13110e;
+  --paper-deep: #0d0c0a;
+  --surface: #1b1814;
+  --surface-2: #251f19;
+  --ink: #f4ede1;
+  --ink-2: #c9bdac;
+  --ink-3: #a89b89;
+  --line: #332b23;
+  --line-strong: #4b4034;
+
+  --brand: #7ac7b0;
+  --brand-dark: #9bd8c4;
+  --brand-ink: #0b2a21;
+  --brand-soft: #1c3a31;
+
+  --a: #5cc0a6;
+  --a-strong: #99dfcc;
+  --a-soft: #193b32;
+  --a-chip-text: #08201a;
+
+  --b: #e58c6d;
+  --b-strong: #f2b39c;
+  --b-soft: #3a241c;
+  --b-chip-text: #2a120b;
+
+  --gold: #dfb05c;
+  --gold-soft: #352a17;
+
+  --danger: #f09a8b;
+  --danger-soft: #3a1f1b;
+  --focus: #8ab8ff;
+
+  --band-bg: #1a2923;
+  --band-ink: #f6f0e5;
+  --band-muted: #b9d3c8;
+  --band-line: rgba(255, 255, 255, 0.15);
+  --band-fill: rgba(255, 255, 255, 0.05);
+
+  --footer-bg: #0b0a08;
+  --footer-ink: #f2ebdf;
+  --footer-muted: #a8a294;
+  --footer-line: rgba(255, 255, 255, 0.12);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 18px 40px -22px rgba(0, 0, 0, 0.7), 0 2px 10px rgba(0, 0, 0, 0.25);
+  --shadow-dialog: 0 32px 90px -20px rgba(0, 0, 0, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --paper: #13110e;
+    --paper-deep: #0d0c0a;
+    --surface: #1b1814;
+    --surface-2: #251f19;
+    --ink: #f4ede1;
+    --ink-2: #c9bdac;
+    --ink-3: #a89b89;
+    --line: #332b23;
+    --line-strong: #4b4034;
+
+    --brand: #7ac7b0;
+    --brand-dark: #9bd8c4;
+    --brand-ink: #0b2a21;
+    --brand-soft: #1c3a31;
+
+    --a: #5cc0a6;
+    --a-strong: #99dfcc;
+    --a-soft: #193b32;
+    --a-chip-text: #08201a;
+
+    --b: #e58c6d;
+    --b-strong: #f2b39c;
+    --b-soft: #3a241c;
+    --b-chip-text: #2a120b;
+
+    --gold: #dfb05c;
+    --gold-soft: #352a17;
+
+    --danger: #f09a8b;
+    --danger-soft: #3a1f1b;
+    --focus: #8ab8ff;
+
+    --band-bg: #1a2923;
+    --band-ink: #f6f0e5;
+    --band-muted: #b9d3c8;
+    --band-line: rgba(255, 255, 255, 0.15);
+    --band-fill: rgba(255, 255, 255, 0.05);
+
+    --footer-bg: #0b0a08;
+    --footer-ink: #f2ebdf;
+    --footer-muted: #a8a294;
+    --footer-line: rgba(255, 255, 255, 0.12);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.18);
+    --shadow-md: 0 18px 40px -22px rgba(0, 0, 0, 0.7), 0 2px 10px rgba(0, 0, 0, 0.25);
+    --shadow-dialog: 0 32px 90px -20px rgba(0, 0, 0, 0.8);
+  }
+}

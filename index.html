@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Both Homes — Free co-parenting custody calendar builder</title>
+  <meta name="description" content="Build a year of co-parenting time in minutes: pick a custody rotation, add holidays and swaps, see overnight totals, then export to any calendar or print it. Free, no account.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="author" content="Both Homes">
+  <link rel="canonical" href="./">
+  <meta name="theme-color" content="#faf6ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14120f" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="preload" href="./assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/print.css" media="print">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Both Homes">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="./">
+  <meta property="og:title" content="Both Homes — the co-parenting calendar that does the math">
+  <meta property="og:description" content="Rotation, holidays, swaps, handoffs and overnight totals in one private calendar. Free, no account, no uploads. Export to any calendar app or print a year.">
+  <meta property="og:image" content="./assets/og-card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A Both Homes custody calendar for November with a 2-2-3 rotation, Thanksgiving labels and a 50/50 overnight split">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Both Homes — the co-parenting calendar that does the math">
+  <meta name="twitter:description" content="Build a year of parenting time, export it to any calendar, print it for the fridge. Private by design.">
+  <meta name="twitter:image" content="./assets/og-card.png">
+  <meta name="twitter:image:alt" content="A Both Homes custody calendar for November with a 2-2-3 rotation and a 50/50 overnight split">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "./#website",
+        "name": "Both Homes",
+        "alternateName": "Both Homes co-parenting calendar",
+        "url": "./",
+        "inLanguage": "en",
+        "description": "A free, local-first co-parenting calendar builder for rotating custody schedules."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "./#app",
+        "name": "Both Homes",
+        "url": "./",
+        "applicationCategory": "UtilitiesApplication",
+        "applicationSubCategory": "Custody and parenting-time calendar",
+        "operatingSystem": "Any modern browser",
+        "browserRequirements": "Requires JavaScript",
+        "isAccessibleForFree": true,
+        "inLanguage": "en",
+        "license": "https://opensource.org/licenses/MIT",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "A local-first co-parenting calendar builder for rotating custody schedules, holidays, handoffs, overnight totals and .ics export.",
+        "featureList": [
+          "2-2-3, 3-4-4-3, alternating weeks and seven other custody rotations",
+          "Holiday and school-break rules that override the rotation",
+          "Overnight totals and fairness percentages across twelve months",
+          "Per-parent .ics export for Google Calendar, Apple Calendar and Outlook",
+          "Printable twelve-month parenting calendar",
+          "Share links that keep names out by default"
+        ],
+        "isPartOf": { "@id": "./#website" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#calendar">Skip to the calendar</a>
+
+  <svg class="icon-sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L18 10a2.83 2.83 0 0 0-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l2-2A5 5 0 0 0 12 4l-1.1 1.1"/><path d="M14 11a5 5 0 0 0-7.1 0l-2 2A5 5 0 0 0 12 20l1.1-1.1"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5M5 3h14"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.4l6.1-.9Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19Z"/><path d="M12 9v5"/><path d="M12 17.5h.01"/></symbol>
+    <symbol id="i-house" viewBox="0 0 24 24"><path d="m3 10.5 9-7.5 9 7.5V21H3Z"/><path d="M9 21v-7h6v7"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./index.html" aria-label="Both Homes home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect class="brand-tile" width="32" height="32" rx="9"/>
+          <path class="brand-lines" d="M5.5 14.4 11 9.6l5.4 4.8M15.7 14.4 21 9.6l5.5 4.8M5.5 14.4V25h21V14.4M16 14.4V25" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-text">Both Homes</span>
+      </a>
+      <div class="header-actions">
+        <span class="save-state" id="save-state" aria-live="polite">
+          <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+          <span>Saved locally</span>
+        </span>
+        <a class="nav-link hide-sm" href="./guide.html">Pattern guide</a>
+        <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">
+          <svg class="icon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <button class="btn btn-quiet hide-sm" type="button" data-open="share-dialog">Share</button>
+        <button class="btn btn-quiet hide-sm" type="button" data-open="export-dialog">Export</button>
+        <button class="btn btn-primary btn-icon-mobile" type="button" data-open="export-dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="hide-sm">Get the calendar</span>
+          <span class="show-sm">Export</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="shell intro" aria-labelledby="hero-title">
+      <div class="intro-copy">
+        <p class="eyebrow">
+          <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
+          Free · no account · nothing leaves this browser
+        </p>
+        <h1 id="hero-title">Two homes.<br><em>One clear plan.</em></h1>
+        <p class="lede">Build a year of parenting time in minutes — rotation, holidays, swaps and handoffs included. Print it, share it, or send it to any calendar.</p>
+      </div>
+      <div class="quickstart" aria-labelledby="quickstart-title">
+        <div class="quickstart-head">
+          <h2 id="quickstart-title">Start with a rotation</h2>
+          <a class="text-link" href="./guide.html">Compare patterns</a>
+        </div>
+        <div class="quickstart-grid" id="quickstart-patterns"></div>
+        <p class="quickstart-note">You can change everything later. Your plan saves itself on this device.</p>
+      </div>
+    </section>
+
+    <div class="shell workspace">
+      <div class="main-col">
+      <section class="calendar-card" id="calendar" tabindex="-1" aria-labelledby="calendar-heading">
+        <div class="cal-head">
+          <div class="cal-month">
+            <button class="icon-btn" type="button" id="cal-prev" aria-label="Previous month">
+              <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+            </button>
+            <h2 id="calendar-heading" aria-live="polite">Calendar</h2>
+            <button class="icon-btn" type="button" id="cal-next" aria-label="Next month">
+              <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+            </button>
+            <button class="btn btn-small btn-quiet" type="button" id="cal-today">Today</button>
+          </div>
+          <div class="cal-meta">
+            <span class="pill" id="pattern-pill">2-2-3</span>
+            <span class="pill pill-muted" id="split-pill">50/50 nights</span>
+          </div>
+        </div>
+
+        <div class="legend" id="legend" aria-label="Calendar legend"></div>
+
+        <div class="cal-scroll">
+          <table class="cal" id="cal-table">
+            <caption class="sr-only">Parenting schedule. Use the arrow keys to move between nights and press Enter to edit one.</caption>
+            <thead>
+              <tr id="cal-weekdays"></tr>
+            </thead>
+            <tbody id="cal-body"></tbody>
+          </table>
+        </div>
+
+        <div class="cal-foot">
+          <p class="cal-hint">
+            <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+            Click any night to swap it, add a note, or plan a trip.
+          </p>
+          <p class="cal-window" id="cal-window"></p>
+        </div>
+      </section>
+
+      <section class="panel panel-summary" aria-labelledby="summary-heading">
+        <div class="panel-head">
+          <div>
+            <h2 id="summary-heading">Time split</h2>
+            <p class="panel-sub" id="summary-window">Plan year</p>
+          </div>
+          <div class="stepper" aria-label="Plan year">
+            <button class="icon-btn icon-btn-sm" type="button" id="window-prev" aria-label="Previous plan year">
+              <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+            </button>
+            <button class="icon-btn icon-btn-sm" type="button" id="window-next" aria-label="Next plan year">
+              <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="splitbar" id="split-bar" role="img" aria-label="Overnight split"></div>
+        <div class="splitrows" id="split-rows"></div>
+        <div class="statgrid" id="summary-stats"></div>
+        <p class="fineprint">Counts every night in this 12-month window. Overnights are the usual shorthand in parenting plans; this is a planning estimate, not a legal calculation.</p>
+      </section>
+      </div>
+
+      <aside class="sidebar" aria-label="Plan details">
+        <section class="panel" id="plan-panel" aria-labelledby="plan-heading">
+          <div class="panel-head">
+            <div>
+              <h2 id="plan-heading">Plan setup</h2>
+              <p class="panel-sub">Names, rhythm and handoffs</p>
+            </div>
+            <button class="link-btn" type="button" id="reset-plan">Reset</button>
+          </div>
+
+          <label class="field">
+            <span>Plan name</span>
+            <input type="text" id="plan-name" maxlength="60" autocomplete="off" placeholder="Our parenting plan">
+          </label>
+
+          <div class="field-row">
+            <label class="field">
+              <span><i class="dot dot-a" aria-hidden="true"></i>Parent A</span>
+              <input type="text" id="parent-a" maxlength="48" autocomplete="off" placeholder="Parent A">
+            </label>
+            <label class="field">
+              <span><i class="dot dot-b" aria-hidden="true"></i>Parent B</span>
+              <input type="text" id="parent-b" maxlength="48" autocomplete="off" placeholder="Parent B">
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Children <span class="optional">optional, for exports</span></span>
+            <input type="text" id="children" maxlength="80" autocomplete="off" placeholder="Ava &amp; Noah">
+          </label>
+
+          <label class="field">
+            <span>Rotation</span>
+            <select id="pattern-select"></select>
+          </label>
+          <div class="cycle-preview" id="cycle-preview" aria-hidden="true"></div>
+          <p class="field-help" id="pattern-help"></p>
+          <button class="link-btn" type="button" id="customize-cycle" aria-expanded="false" aria-controls="cycle-editor">Customize day by day</button>
+
+          <div class="cycle-editor" id="cycle-editor" hidden>
+            <div class="cycle-editor-head">
+              <label class="field field-inline">
+                <span>Cycle length</span>
+                <input type="number" id="cycle-length" min="2" max="28" step="1" inputmode="numeric">
+              </label>
+              <button class="btn btn-small btn-secondary" type="button" id="cycle-done">Done</button>
+            </div>
+            <div class="cycle-chips" id="cycle-chips" role="group" aria-label="Assign each day of the cycle"></div>
+            <p class="field-help">Click a day to switch which parent has it.</p>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span>Pattern starts</span>
+              <input type="date" id="start-date">
+            </label>
+            <label class="field">
+              <span>Week begins</span>
+              <select id="week-start">
+                <option value="sun">Sunday</option>
+                <option value="mon">Monday</option>
+              </select>
+            </label>
+          </div>
+          <p class="field-help">The cycle runs from this date. Starting on a Monday keeps weekend blocks predictable.</p>
+          <div class="inline-actions">
+            <button class="btn btn-small btn-quiet" type="button" id="use-monday">Use that week’s Monday</button>
+            <button class="btn btn-small btn-quiet" type="button" id="swap-parents">Swap A ↔ B</button>
+          </div>
+
+          <div class="field-row">
+            <label class="field">
+              <span>Handoff time</span>
+              <input type="time" id="handoff-time">
+            </label>
+            <label class="field">
+              <span>Handoff place</span>
+              <input type="text" id="handoff-place" maxlength="80" autocomplete="off" placeholder="School gate">
+            </label>
+          </div>
+
+          <div class="backup-row">
+            <button class="link-btn" type="button" id="save-json">
+              <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+              Save a copy
+            </button>
+            <button class="link-btn" type="button" id="import-json-open">
+              <svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg>
+              Open a plan file
+            </button>
+            <input type="file" id="import-json" accept="application/json,.json" hidden>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="holiday-heading">
+          <div class="panel-head">
+            <div>
+              <h2 id="holiday-heading">Holidays &amp; breaks</h2>
+              <p class="panel-sub">Rules beat the rotation; top rule wins</p>
+            </div>
+          </div>
+          <div class="panel-actions">
+            <button class="btn btn-small btn-secondary" type="button" id="add-presets">Common holidays</button>
+            <button class="btn btn-small btn-quiet" type="button" id="add-holiday">
+              <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+              Custom
+            </button>
+          </div>
+          <ul class="rule-list" id="holiday-list"></ul>
+          <p class="empty" id="holiday-empty">No holiday rules yet. Add a few so winter break and long weekends don’t get lost.</p>
+        </section>
+
+        <section class="panel" aria-labelledby="override-heading">
+          <div class="panel-head">
+            <div>
+              <h2 id="override-heading">One-off changes</h2>
+              <p class="panel-sub">Trips, swaps and exceptions</p>
+            </div>
+          </div>
+          <div class="panel-actions">
+            <button class="btn btn-small btn-quiet" type="button" id="add-days">
+              <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+              Add days
+            </button>
+          </div>
+          <ul class="rule-list" id="override-list"></ul>
+          <p class="empty" id="override-empty">Nothing changed. Click a night in the calendar to swap it.</p>
+        </section>
+      </aside>
+    </div>
+
+    <section class="shell export-band" aria-labelledby="export-heading">
+      <div class="export-copy">
+        <p class="eyebrow">Ready when you are</p>
+        <h2 id="export-heading">Take the plan with you</h2>
+        <p>Each parent gets a calendar with only their own nights. Print a year for the fridge, or hand a mediator a clean copy.</p>
+      </div>
+      <div class="export-actions">
+        <button class="export-action" type="button" data-open="export-dialog">
+          <span class="export-icon"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></span>
+          <span><strong>Calendar file</strong><small>.ics for Google, Apple, Outlook</small></span>
+          <svg class="icon export-arrow" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        </button>
+        <button class="export-action" type="button" data-action="print">
+          <span class="export-icon"><svg class="icon" aria-hidden="true"><use href="#i-printer"/></svg></span>
+          <span><strong>Print a year</strong><small>12 months, handoffs and totals</small></span>
+          <svg class="icon export-arrow" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        </button>
+        <button class="export-action" type="button" data-open="share-dialog">
+          <span class="export-icon"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg></span>
+          <span><strong>Share a link</strong><small>No sign-in for either parent</small></span>
+          <svg class="icon export-arrow" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        </button>
+        <button class="export-action" type="button" id="save-backup">
+          <span class="export-icon"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></span>
+          <span><strong>Save a backup</strong><small>A small file you own</small></span>
+          <svg class="icon export-arrow" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div class="footer-brand">
+        <div class="brand brand-on-dark">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect class="brand-tile" width="32" height="32" rx="9"/>
+            <path class="brand-lines" d="M5.5 14.4 11 9.6l5.4 4.8M15.7 14.4 21 9.6l5.5 4.8M5.5 14.4V25h21V14.4M16 14.4V25" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="brand-text">Both Homes</span>
+        </div>
+        <p>A calm, private way to keep two homes on the same page. Built to be understood at a glance, printed without fuss, and owned by the people using it.</p>
+      </div>
+      <div>
+        <h2>Private by design</h2>
+        <p>There are no accounts and no analytics. Your names, dates and notes are saved with <code>localStorage</code> on this device only. Share links keep the plan in the link itself — nothing is uploaded, and anyone holding the link can read it.</p>
+        <details class="privacy-details">
+          <summary>What is stored, and how to clear it</summary>
+          <p>Your plan is one local record. The theme choice is another. Both can be removed with <button class="link-btn link-on-dark" type="button" id="clear-data">Clear this browser’s data</button>. Exported files and share links are copies you control.</p>
+        </details>
+      </div>
+      <div>
+        <h2>Use it with care</h2>
+        <p>Both Homes is a planning tool, not legal advice. Follow your court order or parenting agreement. In an emergency, contact the appropriate local services rather than relying on a calendar.</p>
+        <p class="footer-small">Calendar exports use floating local times, so each app applies its own timezone.</p>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>© 2026 Both Homes · MIT licensed</p>
+      <p><a href="./guide.html">Pattern guide</a> · <a href="./index.html#calendar">Back to the calendar</a></p>
+    </div>
+  </footer>
+
+  <dialog class="dialog" id="day-dialog" aria-labelledby="day-dialog-title">
+    <form class="dialog-form" id="day-form" novalidate>
+      <header class="dialog-head">
+        <div>
+          <p class="eyebrow" id="day-dialog-eyebrow">Night of</p>
+          <h2 id="day-dialog-title">Edit a night</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </header>
+      <div class="dialog-body">
+        <p class="dialog-status" id="day-status"></p>
+        <fieldset class="choice-group">
+          <legend>Who has this night?</legend>
+          <label class="choice">
+            <input type="radio" name="day-owner" value="auto" checked>
+            <span><strong>Follow the plan</strong><small>Rotation and holiday rules apply</small></span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="day-owner" value="a">
+            <span><i class="dot dot-a" aria-hidden="true"></i><strong id="day-a-name">Parent A</strong></span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="day-owner" value="b">
+            <span><i class="dot dot-b" aria-hidden="true"></i><strong id="day-b-name">Parent B</strong></span>
+          </label>
+        </fieldset>
+        <label class="field">
+          <span>Note <span class="optional">optional</span></span>
+          <input type="text" id="day-note" maxlength="160" autocomplete="off" placeholder="Trip to Grandma’s">
+        </label>
+        <div class="field-row">
+          <label class="field">
+            <span>First night</span>
+            <input type="date" id="day-start">
+          </label>
+          <label class="field">
+            <span>Apply through <span class="optional">optional</span></span>
+            <input type="date" id="day-end">
+          </label>
+        </div>
+        <p class="field-help">Leave “Apply through” blank to change just one night. The end date is included.</p>
+        <p class="form-error" id="day-error" role="alert" hidden></p>
+      </div>
+      <footer class="dialog-actions">
+        <button class="btn btn-quiet btn-danger" type="button" id="day-clear" hidden>Remove change</button>
+        <span class="spacer"></span>
+        <button class="btn btn-quiet" type="button" data-close>Cancel</button>
+        <button class="btn btn-primary" type="submit">Save change</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="dialog" id="holiday-dialog" aria-labelledby="holiday-dialog-title">
+    <form class="dialog-form" id="holiday-form" novalidate>
+      <header class="dialog-head">
+        <div>
+          <p class="eyebrow">Holiday rule</p>
+          <h2 id="holiday-dialog-title">Add a holiday or break</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </header>
+      <div class="dialog-body">
+        <label class="field">
+          <span>Name</span>
+          <input type="text" id="holiday-name" maxlength="60" autocomplete="off" placeholder="Winter break" required>
+        </label>
+
+        <label class="field">
+          <span>Type</span>
+          <select id="holiday-kind">
+            <option value="day">One day every year</option>
+            <option value="range">A stretch every year</option>
+            <option value="dates">Specific dates</option>
+          </select>
+        </label>
+
+        <fieldset class="field-group" data-kind="day">
+          <label class="field">
+            <span>Date rule</span>
+            <select id="holiday-day-rule">
+              <option value="fixed">Fixed date</option>
+              <option value="nth">Nth weekday of a month</option>
+            </select>
+          </label>
+          <div class="field-row" data-day-rule="fixed">
+            <label class="field">
+              <span>Month</span>
+              <select id="holiday-month"></select>
+            </label>
+            <label class="field">
+              <span>Day</span>
+              <input type="number" id="holiday-day" min="1" max="31" step="1" inputmode="numeric">
+            </label>
+          </div>
+          <div class="field-row" data-day-rule="nth" hidden>
+            <label class="field">
+              <span>Occurrence</span>
+              <select id="holiday-nth">
+                <option value="1">First</option>
+                <option value="2">Second</option>
+                <option value="3">Third</option>
+                <option value="4">Fourth</option>
+                <option value="-1">Last</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Weekday</span>
+              <select id="holiday-weekday"></select>
+            </label>
+          </div>
+          <div class="field-row" data-day-rule="nth" hidden>
+            <label class="field">
+              <span>Month</span>
+              <select id="holiday-month-nth"></select>
+            </label>
+          </div>
+          <div class="field-row">
+            <label class="field">
+              <span>Length (days)</span>
+              <input type="number" id="holiday-span" min="1" max="90" step="1" inputmode="numeric">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field-group" data-kind="range" hidden>
+          <div class="field-row">
+            <label class="field">
+              <span>Starts</span>
+              <span class="inline-fields">
+                <select id="range-from-month" aria-label="Start month"></select>
+                <input type="number" id="range-from-day" min="1" max="31" step="1" inputmode="numeric" aria-label="Start day">
+              </span>
+            </label>
+            <label class="field">
+              <span>Ends</span>
+              <span class="inline-fields">
+                <select id="range-to-month" aria-label="End month"></select>
+                <input type="number" id="range-to-day" min="1" max="31" step="1" inputmode="numeric" aria-label="End day">
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field-group" data-kind="dates" hidden>
+          <div class="field-row">
+            <label class="field">
+              <span>Start date</span>
+              <input type="date" id="dates-start">
+            </label>
+            <label class="field">
+              <span>End date</span>
+              <input type="date" id="dates-end">
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Whose time?</span>
+            <select id="holiday-assignment">
+              <option value="alternate">Alternate years</option>
+              <option value="a">Always Parent A</option>
+              <option value="b">Always Parent B</option>
+            </select>
+          </label>
+          <label class="field" id="alternate-field">
+            <span>Odd years start with</span>
+            <select id="holiday-alternate-start">
+              <option value="a">Parent A</option>
+              <option value="b">Parent B</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field" id="split-field" hidden>
+          <span>How to split the stretch</span>
+          <select id="holiday-split">
+            <option value="halves">Split in half</option>
+            <option value="weeks">Alternate weeks</option>
+            <option value="whole">Whole stretch with one parent</option>
+          </select>
+        </label>
+
+        <p class="field-help">Rules higher in the list win when dates overlap. Explicit day changes always win.</p>
+        <p class="form-error" id="holiday-error" role="alert" hidden></p>
+      </div>
+      <footer class="dialog-actions">
+        <button class="btn btn-quiet btn-danger" type="button" id="holiday-delete" hidden>Delete rule</button>
+        <span class="spacer"></span>
+        <button class="btn btn-quiet" type="button" data-close>Cancel</button>
+        <button class="btn btn-primary" type="submit">Save rule</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="dialog" id="preset-dialog" aria-labelledby="preset-title">
+    <form class="dialog-form" id="preset-form">
+      <header class="dialog-head">
+        <div>
+          <p class="eyebrow">Quick start</p>
+          <h2 id="preset-title">Add common holidays</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </header>
+      <div class="dialog-body">
+        <label class="field">
+          <span>Where do you live?</span>
+          <select id="preset-region"></select>
+        </label>
+        <p class="field-help">Pick the dates you want. Everything stays editable.</p>
+        <div class="preset-list" id="preset-list"></div>
+        <p class="form-error" id="preset-error" role="alert" hidden></p>
+      </div>
+      <footer class="dialog-actions">
+        <span class="spacer"></span>
+        <button class="btn btn-quiet" type="button" data-close>Cancel</button>
+        <button class="btn btn-primary" type="submit">Add selected</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="dialog" id="export-dialog" aria-labelledby="export-title">
+    <div class="dialog-form">
+      <header class="dialog-head">
+        <div>
+          <p class="eyebrow">Calendar export</p>
+          <h2 id="export-title">Send this plan to a calendar</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </header>
+      <div class="dialog-body">
+        <p class="dialog-lede">Each file contains only that parent’s nights, with handoff details in the event notes. Import it into Google Calendar, Apple Calendar, Outlook, or anything that reads .ics.</p>
+        <label class="check">
+          <input type="checkbox" id="export-handoffs">
+          <span>Add a reminder at every handoff</span>
+        </label>
+        <div class="export-list" id="export-list"></div>
+        <p class="fineprint">Times are written as local wall-clock times, so each calendar app uses the timezone of the device importing it. Re-importing a new file can create duplicates; remove the old calendar first if you update it.</p>
+      </div>
+      <footer class="dialog-actions">
+        <span class="spacer"></span>
+        <button class="btn btn-secondary" type="button" data-action="print">Print instead</button>
+        <button class="btn btn-primary" type="button" data-close>Done</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <dialog class="dialog" id="share-dialog" aria-labelledby="share-title">
+    <div class="dialog-form">
+      <header class="dialog-head">
+        <div>
+          <p class="eyebrow">Share</p>
+          <h2 id="share-title">Send the plan as a link</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </header>
+      <div class="dialog-body">
+        <p class="dialog-lede">The whole plan is encoded in the link. Nothing is uploaded, no account is needed, and the link opens a working copy of the calendar.</p>
+        <fieldset class="check-group">
+          <legend class="sr-only">What to include in the link</legend>
+          <label class="check">
+            <input type="checkbox" id="share-names">
+            <span>Include parent and children names</span>
+          </label>
+          <label class="check">
+            <input type="checkbox" id="share-notes">
+            <span>Include notes and the handoff place</span>
+          </label>
+        </fieldset>
+        <div class="copy-row">
+          <label class="sr-only" for="share-url">Share link</label>
+          <input type="text" id="share-url" readonly>
+          <button class="btn btn-secondary" type="button" id="share-copy">
+            <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
+            Copy
+          </button>
+        </div>
+        <p class="fineprint" id="share-meta"></p>
+        <p class="callout">
+          <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
+          Anyone with the link can read the included details. Leave names and notes off when sharing in a group or with a mediator.
+        </p>
+      </div>
+      <footer class="dialog-actions dialog-actions-wrap">
+        <button class="btn btn-quiet" type="button" id="share-download">Save plan file</button>
+        <button class="btn btn-quiet" type="button" id="share-import">Open a plan file</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" type="button" data-close>Done</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <dialog class="dialog dialog-sm" id="reset-dialog" aria-labelledby="reset-title">
+    <div class="dialog-form">
+      <header class="dialog-head">
+        <div>
+          <p class="eyebrow">Start over</p>
+          <h2 id="reset-title">Reset this plan?</h2>
+        </div>
+        <button class="icon-btn" type="button" data-close aria-label="Close dialog">
+          <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </header>
+      <div class="dialog-body">
+        <p>This clears the names, holidays and one-off changes saved in this browser and starts a fresh 2-2-3 plan. Export a backup first if you want to keep this one.</p>
+      </div>
+      <footer class="dialog-actions">
+        <span class="spacer"></span>
+        <button class="btn btn-quiet" type="button" data-close>Cancel</button>
+        <button class="btn btn-danger-solid" type="button" id="reset-confirm">Reset plan</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <div class="toast-region" id="toasts" aria-live="polite" aria-atomic="false"></div>
+  <div class="print-root" id="print-root" aria-hidden="true"></div>
+
+  <noscript>
+    <div class="noscript">Both Homes needs JavaScript to build your calendar. Everything runs in your browser; nothing is sent to a server.</div>
+  </noscript>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
