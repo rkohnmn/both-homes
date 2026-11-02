@@ -1207,3 +1207,15 @@ body:has(dialog[open]) {
     min-height: 36px;
   }
 }
+
+/* Keep calendar and summary cards intact in printed custody schedules. */
+@media print {
+  .month-card,
+  .calendar-month,
+  .summary-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
