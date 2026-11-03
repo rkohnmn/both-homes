@@ -7,3 +7,7 @@ dist/
 test-results/
 playwright-report/
 _site/
+
+# Browser regression artifacts
+test-results/
+__pycache__/
