@@ -44,6 +44,9 @@ export function decodeToken(token) {
 export function buildShareUrl(plan, options, baseUrl = window.location.href) {
   const shareable = toShareablePlan(plan, options);
   const token = encodeToken(shareable);
+  if (token.length > MAX_TOKEN_LENGTH) {
+    throw new Error('This plan is too large for a share link. Download a plan file instead.');
+  }
   const url = new URL(baseUrl);
   url.hash = `p=${token}`;
   return url.toString();

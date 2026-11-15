@@ -166,10 +166,11 @@ export function buildPlanCalendar({
       const receiverName = parentName(receiver);
       const giverName = parentName(days[i - 1].owner);
       const startDate = days[i].date;
+      const handoffEnd = addMinutes(handoffTime, 20);
       events.push({
         uid: `both-homes-handoff-${startDate}@both-homes.local`,
         start: { date: startDate, time: handoffTime },
-        end: { date: startDate, time: addMinutes(handoffTime, 20).time },
+        end: { date: addDays(startDate, handoffEnd.dayOffset), time: handoffEnd.time },
         summary: forParent === 'both' ? `Handoff — ${receiverName}'s time` : 'Handoff',
         description: [
           `Exchange from ${giverName} to ${receiverName}.`,

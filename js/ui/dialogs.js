@@ -233,12 +233,18 @@ function updateShare() {
   const names = refs.shareNames.checked;
   const notes = refs.shareNotes.checked;
   let url = '';
+  let shareError = '';
   try {
     url = buildShareUrl(plan, { names, notes }, api.getShareBaseUrl());
-  } catch {
-    url = api.getShareBaseUrl();
+  } catch (error) {
+    shareError = error instanceof Error ? error.message : 'Could not create a share link.';
   }
   refs.shareUrl.value = url;
+  refs.shareCopy.disabled = !url;
+  if (!url) {
+    refs.shareMeta.textContent = `${shareError} Download a plan file instead.`;
+    return;
+  }
   const size = new Blob([url]).size;
   const included = names
     ? notes
