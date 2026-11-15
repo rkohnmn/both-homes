@@ -9,6 +9,14 @@
 
 const MS_PER_DAY = 86_400_000;
 
+/** Date.UTC treats years 0–99 as 1900–1999; setUTCFullYear does not. */
+function utcCivilDate(year, month, day) {
+  const date = new Date(0);
+  date.setUTCFullYear(year, month - 1, day);
+  date.setUTCHours(0, 0, 0, 0);
+  return date;
+}
+
 export function isLeapYear(year) {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
@@ -43,7 +51,7 @@ export function isISODate(value) {
 export function toDayNumber(value) {
   const p = parts(value);
   if (!p) throw new RangeError(`Invalid ISO date: ${String(value)}`);
-  return Date.UTC(p.year, p.month - 1, p.day) / MS_PER_DAY;
+  return utcCivilDate(p.year, p.month, p.day).getTime() / MS_PER_DAY;
 }
 
 export function fromDayNumber(dayNumber) {
@@ -68,7 +76,7 @@ export function spanDays(start, end) {
 export function weekdayOf(value) {
   const p = parts(value);
   if (!p) throw new RangeError(`Invalid ISO date: ${String(value)}`);
-  return new Date(Date.UTC(p.year, p.month - 1, p.day)).getUTCDay();
+  return utcCivilDate(p.year, p.month, p.day).getUTCDay();
 }
 
 export function startOfMonth(value) {
